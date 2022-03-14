@@ -24,6 +24,7 @@ Ps2: o uso do Bootstrap (ou qualquer outra lib CSS) é opcional.
 */
 
 const correctAnswers = ["B", "B", "B", "B"];
+
 const form = document.querySelector(".quiz-form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -35,6 +36,7 @@ form.addEventListener("submit", (event) => {
     form.question3.value,
     form.question4.value,
   ];
+  const h2 = document.createElement('h2')
 
   answers.forEach((answer, index) => {
     if (answer === "") {
@@ -45,7 +47,7 @@ form.addEventListener("submit", (event) => {
       questions += 1;
     }
   });
-  console.log(
-    `Você acertou ${questions} perguntas, sua pontuação é ${pontuation} pontos`
-  );
+  h2.textContent = `Você acertou ${questions} perguntas, sua pontuação é ${pontuation} pontos`
+  form.insertAdjacentElement('afterend', h2)
+  
 });
