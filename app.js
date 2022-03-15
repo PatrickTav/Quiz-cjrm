@@ -47,6 +47,23 @@ form.addEventListener("submit", (event) => {
       questions += 1;
     }
   });
-  h2.textContent = `Você acertou ${questions} perguntas, sua pontuação é ${pontuation} pontos`;
-  form.insertAdjacentElement("afterend", h2);
+
+  scrollTo(0, 0);
+
+  // h2.innerHTML = `Você acertou ${questions} perguntas, sua pontuação é <span>${pontuation}%</span> `;
+
+  form.insertAdjacentElement("beforebegin", h2);
+  h2.classList.add("result");
+
+  let counter = 0;
+
+  const timer = setInterval(() => {
+    if (counter === pontuation) {
+      clearInterval(timer);
+    }
+
+    h2.innerHTML = `Você acertou ${questions} perguntas, sua pontuação é <span>${counter}%</span> `;
+
+    counter++;
+  }, 10);
 });
