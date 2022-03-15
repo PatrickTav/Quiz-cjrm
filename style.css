@@ -12,7 +12,7 @@ body {
     rgba(24, 95, 240, 1) 64.5%
   );
   background-repeat: no-repeat;
-  font-family: "Bangers", cursive;
+  font-family: "Bangers", Arial, cursive;
 }
 .bar {
   width: 100%;

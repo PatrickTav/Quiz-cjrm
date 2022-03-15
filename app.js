@@ -36,7 +36,7 @@ form.addEventListener("submit", (event) => {
     form.question3.value,
     form.question4.value,
   ];
-  const h2 = document.createElement('h2')
+  const h2 = document.createElement("h2");
 
   answers.forEach((answer, index) => {
     if (answer === "") {
@@ -47,7 +47,6 @@ form.addEventListener("submit", (event) => {
       questions += 1;
     }
   });
-  h2.textContent = `Você acertou ${questions} perguntas, sua pontuação é ${pontuation} pontos`
-  form.insertAdjacentElement('afterend', h2)
-  
+  h2.textContent = `Você acertou ${questions} perguntas, sua pontuação é ${pontuation} pontos`;
+  form.insertAdjacentElement("afterend", h2);
 });
