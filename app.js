@@ -23,47 +23,64 @@ Ps: se você não conseguiu fazer tudo o que foi pedido acima, abra a issue mesm
 Ps2: o uso do Bootstrap (ou qualquer outra lib CSS) é opcional.
 */
 
-const correctAnswers = ["B", "B", "B", "B"];
-
+const correctAnswers = ["D", "B", "A", "B"];
 const form = document.querySelector(".quiz-form");
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  let pontuation = 0;
-  let questions = 0;
-  const answers = [
-    form.question1.value,
-    form.question2.value,
-    form.question3.value,
-    form.question4.value,
-  ];
-  const h2 = document.createElement("h2");
+const h2 = document.createElement("h2");
 
+let pontuation = 0;
+let questions = 0;
+
+const getUserAnswer = () => {
+  const answers = [];
+
+  correctAnswers.forEach((_, index) => {
+    const userAnswer = form[`question${index + 1}`].value;
+    answers.push(userAnswer);
+  });
+  return answers;
+};
+
+const calculateUserScore = (answers) => {
   answers.forEach((answer, index) => {
-    if (answer === "") {
-      alert(`Marque uma opção da pergunta antes de prosseguir`); //Implementar feature para impedir de continuar se não marcar a pergunta certa
-    }
     if (answer === correctAnswers[index]) {
       pontuation += 25;
       questions += 1;
     }
   });
+};
 
-  scrollTo(0, 0);
-
-  // h2.innerHTML = `Você acertou ${questions} perguntas, sua pontuação é <span>${pontuation}%</span> `;
-
+const showFinalScore = () => {
+  scrollTo({
+    top:0,
+    left:0,
+    behavior:"smooth"
+  });
   form.insertAdjacentElement("beforebegin", h2);
-  h2.classList.add("result");
+  h2.classList.add("final-score-container");
+};
 
+const animateFinalScore = () => {
   let counter = 0;
 
   const timer = setInterval(() => {
     if (counter === pontuation) {
       clearInterval(timer);
     }
-
-    h2.innerHTML = `Você acertou ${questions} perguntas, sua pontuação é <span>${counter}%</span> `;
-
+    h2.innerHTML = `Você acertou ${questions} das perguntas, sua pontuação é <span>${counter}%</span> `;
     counter++;
   }, 10);
+};
+const resetScore = () => pontuation = 0
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const answers = getUserAnswer();
+resetScore()
+  calculateUserScore(answers);
+  
+  showFinalScore();
+
+  animateFinalScore();
+  
 });
